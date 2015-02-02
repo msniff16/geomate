@@ -15,11 +15,18 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- Leaflet -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Mapbox -->
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+
 </head>
 <body>
 
@@ -28,11 +35,9 @@
 
     <script>
 
-        var map = L.map('map').setView([51.505, -0.09], 13);
-        L.tileLayer('http://{s}.tiles.mapbox.com/v3/MapID/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18
-        }).addTo(map);
+        // Create a map in the div #map
+        L.mapbox.accessToken = 'pk.eyJ1IjoiY2dhd20iLCJhIjoiTnMtVTBQMCJ9.Lq400ePqtpC_9NJmNRAA1w';
+        L.mapbox.map('map', 'cgawm.l42agboc');
 
     </script>
 
