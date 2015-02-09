@@ -47,6 +47,14 @@
         })
         .addTo(map);
 
+        // Add gpx to map
+        var runLayer = omnivore.gpx('test_data/matt_2-15-15_garmin.gpx')
+        .on('ready', function() {
+            map.fitBounds(runLayer.getBounds());
+        })
+        .addTo(map);
+
+
     </script>
 
 </body>
