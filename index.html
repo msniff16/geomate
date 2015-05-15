@@ -52,8 +52,8 @@
     <!-- main controls -->
     <span id="speed">{{getSpeed()}}</span>
     <input id="rangeSlider" type="range" min="15" max="500" step="5" name="speed" ng-model="speed" />
-    <button class="btn btn-primary" ng-click="run()">Tracked Run</button>
-    <button style="margin-left: 3px;" class="btn btn-primary" ng-click="runThru()">Followed Run</button>
+    <button class="btn btn-primary" ng-click="startRun('tracked')">Tracked Run</button>
+    <button style="margin-left: 3px;" class="btn btn-primary" ng-click="startRun('followed')">Followed Run</button>
 
   </div>
 
