@@ -1,0 +1,2 @@
+# geomate
+GeoJSON animator!
