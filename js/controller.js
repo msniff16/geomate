@@ -22,8 +22,6 @@ myApp.controller("mainController", function($scope, $http, $log) {
       // load in geoJSON file from server
       $.getJSON("track_data/" + $scope.currentFile, function(data) {
 
-          console.log(runType);
-
           $scope.data = data;
           $scope.coordinate = data.features[0].geometry.coordinates;
           $scope.numTracks = data.features.length;
@@ -38,11 +36,13 @@ myApp.controller("mainController", function($scope, $http, $log) {
           $scope.map.setView(latlng, 16);
 
           // call animation start
-          if(runType == 'tracked') {
-            $scope.animateRun('tracked');
+          if(runType == "tracked") {
+            $scope.animateRun("tracked");
           }
-          else if(runType == 'followed') {
-            $scope.animateRun('followed');
+          else if(runType == "followed") {
+            // create only marker
+            $scope.marker = L.marker([$scope.currentLat, $scope.currentLng]).addTo($scope.map);
+            $scope.animateRun("followed");
           }
 
       });
@@ -55,7 +55,7 @@ myApp.controller("mainController", function($scope, $http, $log) {
     if($scope.currentLat) {
 
       // need new marker added if is a tracked run
-      if(runType == 'tracked') {
+      if(runType == "tracked") {
         $scope.marker = L.marker([$scope.currentLat, $scope.currentLng]).addTo($scope.map);
       }
 
@@ -77,15 +77,14 @@ myApp.controller("mainController", function($scope, $http, $log) {
       $scope.coordinate =  $scope.data.features[$scope.currentTrack].geometry.coordinates
       $scope.currentLat = $scope.coordinate[1];
       $scope.currentLng = $scope.coordinate[0];
-
     }
 
     // call this same function again
-    if(runType == 'tracked') {
-      $scope.interval = setTimeout($scope.animateRun('tracked'), $scope.speed);
+    if(runType == "tracked") {
+      $scope.interval = setTimeout($scope.animateRun, $scope.speed, "tracked");
     }
-    else if(runType == 'followed') {
-      $scope.interval = setTimeout(scope.animateRun('followed'), $scope.speed);
+    else if(runType == "followed") {
+      $scope.interval = setTimeout($scope.animateRun, $scope.speed, "followed");
     }
 
   };
