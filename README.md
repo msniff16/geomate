@@ -9,15 +9,15 @@ You can change the speed of the pins in real time with the slider. Variables set
 
 ## Methods
 
-* startRun(runType)
+* #startRun(runType)
 <br />
 Pulls the geoJSON file from the server and loads it into memory. Scans first data point of file to set currentLat and currentLng for the map. If runType parameter = "tracked" then function calls animateRun('tracked'). If runType parameter = "followed" then function calls animateRun('followed').
 
-* animateRun(runType)
+* #animateRun(runType)
 <br />
 Animates the data points by parsing JSON with a setTimeout loop. New markers are added to map if runType = "tracked" otherwise marker positions are just updated for runType "followed".
 
-* getSpeed()
+* #getSpeed()
 <br />
 Returns the current speed of the animation. Default is 200 ms and can be changed by the $scope.speed variable.
 
