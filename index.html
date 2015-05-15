@@ -1,61 +1,70 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+
+    <!-- Built with angularJS, turfJS, leafletJS, bootstrap, and mapBox -->
+
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+
+    <!-- Turf JS-->
+    <script src="js/turf.min.js" charset="utf-8"></script>
 
     <!-- Leaflet -->
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
     <!-- Mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Personal Style -->
+    <link rel="stylesheet" href="css/style.css" />
+
 </head>
-<body>
 
-    <!-- Map -->
-    <div id="map"></div>
+<!-- Start Angular App -->
+<body ng-app="myApp" ng-controller="mainController">
 
-    <script>
+  <!-- W&M Logo -->
+  <img id="logo" src="img/cipher.png" />
 
-        // Create a map in the div #map
-        L.mapbox.accessToken = 'pk.eyJ1IjoiY2dhd20iLCJhIjoiTnMtVTBQMCJ9.Lq400ePqtpC_9NJmNRAA1w';
-        var map = L.mapbox.map('map', 'cgawm.l42agboc');
+  <!-- Control Bar -->
+  <div class="topBar">
 
-        // Add gpx to map
-        var runLayer = omnivore.gpx('test_data/matt_2-2-15_myTracks.gpx')
-        .on('ready', function() {
-            map.fitBounds(runLayer.getBounds());
-        })
-        .addTo(map);
+    <!-- <button ng-click="startAnimation()">Start Animation</button> -->
+    <!-- <button ng-click="stopAnimation()">Stop Animation</button> -->
 
-        // Add gpx to map
-        var runLayer2 = omnivore.gpx('test_data/matt_2-15-15_garmin.gpx')
-        .on('ready', function() {
-            map.fitBounds(runLayer2.getBounds());
-        })
-        .addTo(map);
+    <!-- Form to submit new geojson file -->
+    <form id="uploadForm" enctype="multipart/form-data" action="upload.py" method="post">
+      <span class="btn btn-default btn-file">
+          Upload geojson <input id="geojsonFile" type="file">
+      </span>
+      <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
 
+    <!-- main controls -->
+    <span id="speed">{{getSpeed()}}</span>
+    <input id="rangeSlider" type="range" min="15" max="500" step="5" name="speed" ng-model="speed" />
+    <button class="btn btn-primary" ng-click="run()">Tracked Run</button>
+    <button style="margin-left: 3px;" class="btn btn-primary" ng-click="runThru()">Followed Run</button>
 
-    </script>
+  </div>
+
+  <!-- Add marker -->
+  <button ng-click="addMarker()">Add Marker</button>
+
+  <!-- Remove marker -->
+  <button ng-click="removeMarker()">Remove Marker</button>
+
+  <!-- Map -->
+  <div id="map"></div>
 
 </body>
 </html>

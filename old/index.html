@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Leaflet -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Mapbox -->
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+</head>
+<body>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <script>
+
+        // Create a map in the div #map
+        L.mapbox.accessToken = 'pk.eyJ1IjoiY2dhd20iLCJhIjoiTnMtVTBQMCJ9.Lq400ePqtpC_9NJmNRAA1w';
+        var map = L.mapbox.map('map', 'cgawm.l42agboc');
+
+        // Add gpx to map
+        var runLayer = omnivore.gpx('test_data/matt_2-2-15_myTracks.gpx')
+        .on('ready', function() {
+            map.fitBounds(runLayer.getBounds());
+        })
+        .addTo(map);
+
+        // Add gpx to map
+        var runLayer2 = omnivore.gpx('test_data/matt_2-15-15_garmin.gpx')
+        .on('ready', function() {
+            map.fitBounds(runLayer2.getBounds());
+        })
+        .addTo(map);
+
+
+    </script>
+
+</body>
+</html>
